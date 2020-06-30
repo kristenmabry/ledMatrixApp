@@ -1,3 +1,14 @@
 <resources>
-    <string name="app_name">LED Matrix</string>
+    <string name="app_name">LED\nMatrix</string>
+    <string name="start_button">Start</string>
+    <string name="send_text">Send Text</string>
+    <string name="send_custom">Send Custom</string>
+    <string name="view_saved">View Saved</string>
+    <string name="connect_bluetooth">Connect Bluetooth</string>
+    <string name="get_current">Get Current</string>
+    <string name="first_line">Line 1:</string>
+    <string name="second_line">Line 2:</string>
+    <string name="preview">Preview Text</string>
+    <string name="cancel">Cancel</string>
+    <string name="save">Save</string>
 </resources>
