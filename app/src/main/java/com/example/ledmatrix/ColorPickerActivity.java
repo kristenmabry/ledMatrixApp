@@ -14,9 +14,7 @@ public class ColorPickerActivity extends AppCompatActivity implements View.OnCli
     final static public int KEY_PICKER_CODE = 1000;
     final static public String KEY_PICKER_DATA = "color_values";
     final static public String KEY_PICKER_NUM = "picker_num";
-    final static public String KEY_LINE_NUM = "line_num";
     private int pickerNum;
-    private int lineNum;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,7 +22,6 @@ public class ColorPickerActivity extends AppCompatActivity implements View.OnCli
         setContentView(R.layout.activity_color_picker);
         Intent intent = getIntent();
         pickerNum = intent.getIntExtra(KEY_PICKER_NUM, 0);
-        lineNum = intent.getIntExtra(KEY_LINE_NUM, 1);
         GridLayout grid = (GridLayout) findViewById(R.id.grid);
         generateColors(grid);
     }
@@ -32,7 +29,6 @@ public class ColorPickerActivity extends AppCompatActivity implements View.OnCli
     @Override
     public void onClick(View v) {
         Intent returnIntent = new Intent();
-        returnIntent.putExtra(KEY_LINE_NUM, lineNum);
         returnIntent.putExtra(KEY_PICKER_NUM, pickerNum);
         returnIntent.putExtra(KEY_PICKER_DATA, getColorValues(v.getId()));
         setResult(Activity.RESULT_OK, returnIntent);

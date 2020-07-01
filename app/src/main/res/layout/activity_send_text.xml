@@ -1,24 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".SendTextActivity"
     android:orientation="vertical">
 
-    <com.example.ledmatrix.LineEditorComponent
+    <fragment
+        android:name="com.example.ledmatrix.LineEditorFragment"
         android:id="@+id/line1"
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true" />
+        android:layout_alignParentTop="true"
+        app:title="@string/first_line"
+        />
 
-    <com.example.ledmatrix.LineEditorComponent
+    <fragment
+        android:name="com.example.ledmatrix.LineEditorFragment"
         android:id="@+id/line2"
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
-        android:layout_below="@id/line1"/>
+        android:layout_below="@id/line1"
+        app:title="@string/second_line"
+        />
 
     <Button
         android:id="@+id/preview"
@@ -29,6 +36,7 @@
         android:text="@string/preview"
         android:layout_below="@id/line2"
         android:background="@color/colorAccent"
+        android:onClick="previewText"
         />
 
     <TextView
@@ -68,6 +76,7 @@
             android:layout_margin="@dimen/default_margin"
             android:text="@string/cancel"
             android:background="@color/colorAccent"
+            android:onClick="openChoices"
             />
         <Button
             android:id="@+id/save_text"
