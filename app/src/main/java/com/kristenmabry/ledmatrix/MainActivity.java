@@ -1,4 +1,4 @@
-package com.example.ledmatrix;
+package com.kristenmabry.ledmatrix;
 
 
 import android.content.Intent;

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.kristenmabry.ledmatrix.SaveLayoutActivity"
+    android:paddingHorizontal="@dimen/extra_padding_horizontal"
+    >
+    <TextView
+        android:id="@+id/name_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/default_margin"
+        android:layout_marginTop="@dimen/extra_padding_vertical"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:text="@string/name_label"
+        android:textSize="@dimen/font_size" />
+    <EditText
+        android:id="@+id/name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/default_margin"
+        android:layout_below="@id/name_label"
+        android:inputType="text"
+        />
+
+    <TextView
+        android:id="@+id/sort_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/default_margin"
+        android:layout_marginTop="@dimen/default_margin"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@id/name"
+        android:text="@string/sort_label"
+        android:textSize="@dimen/font_size" />
+    <EditText
+        android:id="@+id/sort_order"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/default_margin"
+        android:layout_below="@id/sort_label"
+        android:inputType="number"
+        android:text="@string/default_sort"
+        />
+
+    <Button
+        android:id="@+id/cancel_save"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/default_margin"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:text="@string/cancel"
+        android:background="@color/colorAccent"
+        android:onClick="cancel"
+        />
+    <Button
+        android:id="@+id/save"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/default_margin"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:text="@string/save"
+        android:background="@color/colorAccent"
+        android:onClick="save"
+        />
+</RelativeLayout>

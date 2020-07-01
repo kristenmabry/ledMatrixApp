@@ -12,4 +12,8 @@
     <string name="cancel">Cancel</string>
     <string name="save">Save</string>
     <string name="blank_line">Line:</string>
+    <string name="name_label">Name:</string>
+    <string name="sort_label">Sort Order:</string>
+    <string name="error_saving">Error saving layout</string>
+    <string name="default_sort">0</string>
 </resources>

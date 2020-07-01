@@ -1,4 +1,4 @@
-package com.example.ledmatrix;
+package com.kristenmabry.ledmatrix;
 
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
@@ -17,6 +17,7 @@ public class ChoicesActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent intent = new Intent(ChoicesActivity.this, SendTextActivity.class);
+                intent.putExtra(SendTextActivity.KEY_IS_NEW, true);
                 startActivity(intent);
             }
         });

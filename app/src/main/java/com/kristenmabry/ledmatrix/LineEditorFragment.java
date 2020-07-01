@@ -1,4 +1,4 @@
-package com.example.ledmatrix;
+package com.kristenmabry.ledmatrix;
 
 import android.content.Context;
 import android.content.Intent;
@@ -39,7 +39,7 @@ public class LineEditorFragment extends Fragment implements View.OnClickListener
     }
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         TextView titleView = (TextView) view.findViewById(R.id.line_title);
         titleView.setText(mTitle);
@@ -105,4 +105,7 @@ public class LineEditorFragment extends Fragment implements View.OnClickListener
         }
     }
 
+    public int[][] getColors() {
+        return colors;
+    }
 }

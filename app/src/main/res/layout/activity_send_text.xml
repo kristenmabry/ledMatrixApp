@@ -8,18 +8,17 @@
     android:orientation="vertical">
 
     <fragment
-        android:name="com.example.ledmatrix.LineEditorFragment"
+        android:name="com.kristenmabry.ledmatrix.LineEditorFragment"
         android:id="@+id/line1"
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
-        android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         app:title="@string/first_line"
         />
 
     <fragment
-        android:name="com.example.ledmatrix.LineEditorFragment"
+        android:name="com.kristenmabry.ledmatrix.LineEditorFragment"
         android:id="@+id/line2"
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
@@ -85,6 +84,7 @@
             android:layout_margin="@dimen/default_margin"
             android:text="@string/save"
             android:background="@color/colorAccent"
+            android:onClick="saveLayout"
             />
         <Button
             android:layout_width="wrap_content"

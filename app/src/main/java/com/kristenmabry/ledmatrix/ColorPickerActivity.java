@@ -1,4 +1,4 @@
-package com.example.ledmatrix;
+package com.kristenmabry.ledmatrix;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -56,8 +56,7 @@ public class ColorPickerActivity extends AppCompatActivity implements View.OnCli
         int r = id / 100;
         int g = (id % 100) / 10;
         int b = id % 10;
-        int[] colors = { r, g, b };
-        return colors;
+        return new int[] { r, g, b };
     }
 
     static public String intToHex(int r, int g, int b) {

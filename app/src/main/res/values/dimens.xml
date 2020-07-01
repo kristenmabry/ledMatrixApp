@@ -5,4 +5,6 @@
     <dimen name="preview_font_size">48sp</dimen>
     <dimen name="color_picker_size">32dp</dimen>
     <dimen name="color_picker_margin">24dp</dimen>
+    <dimen name="extra_padding_horizontal">36dp</dimen>
+    <dimen name="extra_padding_vertical">64dp</dimen>
 </resources>
