@@ -87,7 +87,8 @@ public class SendTextActivity extends AppCompatActivity {
     private Spanned formatText(String text, String[] colors) {
         final String FONT_REPLACEMENT = "<font color='%1$s'>%2$s</font>";
         String lineText = "";
-        for (int i = 0; i < 5; ++i) {
+        text = String.format("%1$-5s", text);
+        for (int i = 0; i < text.length(); ++i) {
             lineText += String.format(FONT_REPLACEMENT, colors[i], text.substring(i, i + 1));
         }
         return Html.fromHtml(lineText);
