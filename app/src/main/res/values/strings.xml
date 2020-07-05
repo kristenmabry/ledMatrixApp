@@ -16,4 +16,10 @@
     <string name="sort_label">Sort Order:</string>
     <string name="error_saving">Error saving layout</string>
     <string name="default_sort">0</string>
+    <string name="saved_layouts">Saved Layouts</string>
+    <string name="no_layouts">You don\'t have any saved layouts. Create one below.</string>
+    <string name="create_text">Create Text Layout</string>
+    <string name="create_custom">Create Custom Layout</string>
+    <string name="error_loading">Error loading files</string>
+    <string name="layout_saved">%1$s layout saved</string>
 </resources>

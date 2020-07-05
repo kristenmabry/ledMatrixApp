@@ -74,6 +74,13 @@ public class MatrixTextLayout implements Parcelable {
         this.sortOrder = sortOrder;
     }
 
+    public void update(String l1, String l2, int[][] c1, int[][] c2) {
+        this.line1 = l1;
+        this.line2 = l2;
+        this.colors1 = c1;
+        this.colors2 = c2;
+    }
+
     public String getFileName() {
         return this.filename;
     }
@@ -104,5 +111,10 @@ public class MatrixTextLayout implements Parcelable {
 
     public int[][] getColors2() {
         return colors2;
+    }
+
+    public void saveFile(String fileName) {
+        this.filename = fileName;
+        this.isNew = false;
     }
 }

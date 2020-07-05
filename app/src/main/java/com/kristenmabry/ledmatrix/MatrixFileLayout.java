@@ -1,21 +1,39 @@
 package com.kristenmabry.ledmatrix;
 
+import java.util.Arrays;
+import java.util.Comparator;
+
 public class MatrixFileLayout {
     private LayoutTypes type;
-    private String name;
-    private int sortOrder;
-    private String line1;
-    private String line2;
-    private int[][] colors1;
-    private int[][] colors2;
+    private MatrixTextLayout textLayout;
 
     public MatrixFileLayout(MatrixTextLayout layout) {
         this.type = LayoutTypes.Text;
-        this.name = layout.getName();
-        this.sortOrder = layout.getSortOrder();
-        this.line1 = layout.getLine1();
-        this.line2 = layout.getLine2();
-        this.colors1 = layout.getColors1();
-        this.colors2 = layout.getColors2();
+        this.textLayout = layout;
     }
+
+    public MatrixTextLayout getLayout() {
+        return this.textLayout;
+    }
+
+    public String getDisplayName() {
+        return this.textLayout.getName() + (this.type == LayoutTypes.Text ? " (Text)" : " (Custom)");
+    }
+
+    public LayoutTypes getType() {
+        return type;
+    }
+
+    public static MatrixFileLayout[] sortForDisplay(MatrixFileLayout[] layouts) {
+        Comparator comparator = new Comparator<MatrixFileLayout>() {
+            @Override
+            public int compare(MatrixFileLayout a, MatrixFileLayout b) {
+                return a.getLayout().getSortOrder() < b.getLayout().getSortOrder() ? -1
+                        : a.getLayout().getName().compareTo(b.getLayout().getName());
+            }
+        };
+        Arrays.sort(layouts, comparator);
+        return layouts;
+    }
+
 }

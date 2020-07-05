@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 
 public class ChoicesActivity extends AppCompatActivity {
 
@@ -12,14 +11,16 @@ public class ChoicesActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_choices);
+    }
 
-        final Button button = (Button) findViewById(R.id.send_text);
-        button.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                Intent intent = new Intent(ChoicesActivity.this, SendTextActivity.class);
-                intent.putExtra(SendTextActivity.KEY_IS_NEW, true);
-                startActivity(intent);
-            }
-        });
+    public void sendText(View view) {
+        Intent intent = new Intent(ChoicesActivity.this, SendTextActivity.class);
+        intent.putExtra(SendTextActivity.KEY_IS_NEW, true);
+        startActivity(intent);
+    }
+
+    public void viewSaved(View view) {
+        Intent intent = new Intent(ChoicesActivity.this, ViewLayoutsActivity.class);
+        startActivity(intent);
     }
 }

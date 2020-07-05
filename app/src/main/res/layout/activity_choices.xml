@@ -21,7 +21,9 @@
         android:layout_height="wrap_content"
         android:text="@string/send_text"
         android:layout_margin="@dimen/default_margin"
-        android:background="@color/colorAccent"/>
+        android:background="@color/colorAccent"
+        android:onClick="sendText"
+        />
 
     <Button
         android:id="@+id/send_custom"
@@ -39,7 +41,9 @@
         android:layout_margin="@dimen/default_margin"
         android:layout_gravity="center"
         android:text="@string/view_saved"
-        android:background="@color/colorAccent"/>
+        android:background="@color/colorAccent"
+        android:onClick="viewSaved"
+        />
 
     <Button
         android:id="@+id/get_current"

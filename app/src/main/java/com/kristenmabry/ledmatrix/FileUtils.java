@@ -1,6 +1,9 @@
 package com.kristenmabry.ledmatrix;
 
 import android.content.Context;
+
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
@@ -19,11 +22,40 @@ public class FileUtils {
             if (fos != null) {
                 try {
                     fos.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
+                } catch (Exception e) {
+                    return false;
                 }
             }
         }
         return true;
+    }
+
+    public static String[] readFiles(Context context) {
+        String[] files = context.getFilesDir().list();
+        StringBuffer[] fileContents = new StringBuffer[files.length];
+        String[] fileStrings = new String[files.length];
+        for (int i = 0; i < files.length; ++i) {
+            FileInputStream fis = null;
+            try {
+                fis = context.openFileInput(files[i]);
+                int read;
+                fileContents[i] = new StringBuffer();
+                while((read = fis.read()) != -1) {
+                    fileContents[i].append((char) read);
+                }
+                fileStrings[i] = fileContents[i].toString();
+            } catch (Exception e) {
+                return null;
+            } finally {
+                if (fis != null) {
+                    try {
+                        fis.close();
+                    } catch (Exception e) {
+                        return null;
+                    }
+                }
+            }
+        }
+        return fileStrings;
     }
 }

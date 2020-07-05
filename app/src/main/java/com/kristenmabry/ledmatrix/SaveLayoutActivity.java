@@ -27,8 +27,13 @@ public class SaveLayoutActivity extends AppCompatActivity {
         layout = intent.getParcelableExtra(KEY_MATRIX_LAYOUT);
 
         nameInput = (EditText) findViewById(R.id.name);
-        nameInput.setText(layout.getLine1() + " " + layout.getLine2());
         sortInput = (EditText) findViewById(R.id.sort_order);
+        if (layout.getIsNew()) {
+            nameInput.setText(layout.getLine1() + " " + layout.getLine2());
+        } else {
+            nameInput.setText(layout.getName());
+            sortInput.setText(String.valueOf(layout.getSortOrder()));
+        }
     }
 
     public void cancel(View view) {
@@ -46,12 +51,15 @@ public class SaveLayoutActivity extends AppCompatActivity {
                 fileName = layout.getName() + "_" + i++;
             }
             fileName += ".json";
+            layout.saveFile(fileName);
         }
 
         Gson gson = new Gson();
         String json = gson.toJson(new MatrixFileLayout(layout), MatrixFileLayout.class);
         if (FileUtils.writeToFile(this, fileName, json)) {
-            finish();
+            Toast.makeText(this, getResources().getString(R.string.layout_saved, layout.getName()), Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(this, ViewLayoutsActivity.class);
+            startActivity(intent);
         } else {
             Toast.makeText(this, getResources().getString(R.string.error_saving), Toast.LENGTH_SHORT).show();
         }

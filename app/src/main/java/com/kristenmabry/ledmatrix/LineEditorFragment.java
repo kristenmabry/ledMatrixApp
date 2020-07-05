@@ -108,4 +108,11 @@ public class LineEditorFragment extends Fragment implements View.OnClickListener
     public int[][] getColors() {
         return colors;
     }
+
+    public void setPrevLayout(String text, int[][] colorArr) {
+        input.setText(text);
+        for (int i = 0; i < 5; i++) {
+            this.setColor(i, colorArr[i]);
+        }
+    }
 }

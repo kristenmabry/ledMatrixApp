@@ -5,7 +5,6 @@ import androidx.core.text.HtmlCompat;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.Html;
 import android.text.Spanned;
 import android.view.View;
 import android.widget.TextView;
@@ -17,6 +16,7 @@ public class SendTextActivity extends AppCompatActivity {
     private TextView line1Output;
     private TextView line2Output;
     private boolean isNew;
+    private MatrixTextLayout prevLayout;
 
 
     @Override
@@ -31,6 +31,13 @@ public class SendTextActivity extends AppCompatActivity {
         line2 = (LineEditorFragment) getSupportFragmentManager().findFragmentById(R.id.line2);
         line1Output = (TextView) findViewById(R.id.line1_output);
         line2Output = (TextView) findViewById(R.id.line2_output);
+
+        if (!isNew) {
+            prevLayout = intent.getParcelableExtra(SaveLayoutActivity.KEY_MATRIX_LAYOUT);
+            line1.setPrevLayout(prevLayout.getLine1(), prevLayout.getColors1());
+            line2.setPrevLayout(prevLayout.getLine2(), prevLayout.getColors2());
+            this.previewText(null);
+        }
     }
 
     public void previewText(View v) {
@@ -51,15 +58,18 @@ public class SendTextActivity extends AppCompatActivity {
         return HtmlCompat.fromHtml(lineText, HtmlCompat.FROM_HTML_MODE_LEGACY);
     }
 
-    public void openChoices(View v) {
-        Intent intent = new Intent(SendTextActivity.this, ChoicesActivity.class);
-        startActivity(intent);
+    public void cancel(View v) {
+        finish();
     }
 
     public void saveLayout(View view) {
         Intent intent = new Intent(this, SaveLayoutActivity.class);
-        MatrixTextLayout layout = new MatrixTextLayout(line1.getText(), line2.getText(), line1.getColors(), line2.getColors(), isNew);
-        intent.putExtra(SaveLayoutActivity.KEY_MATRIX_LAYOUT, layout);
+        if (isNew) {
+            prevLayout = new MatrixTextLayout(line1.getText(), line2.getText(), line1.getColors(), line2.getColors(), isNew);
+        } else {
+            prevLayout.update(line1.getText(), line2.getText(), line1.getColors(), line2.getColors());
+        }
+        intent.putExtra(SaveLayoutActivity.KEY_MATRIX_LAYOUT, prevLayout);
         startActivity(intent);
     }
 }
