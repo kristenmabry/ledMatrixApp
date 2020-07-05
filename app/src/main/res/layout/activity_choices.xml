@@ -21,7 +21,7 @@
         android:layout_height="wrap_content"
         android:text="@string/send_text"
         android:layout_margin="@dimen/default_margin"
-        android:background="@color/colorAccent"
+        android:background="@drawable/button_ripple_effect"
         android:onClick="sendText"
         />
 
@@ -32,7 +32,8 @@
         android:layout_margin="@dimen/default_margin"
         android:layout_gravity="center"
         android:text="@string/send_custom"
-        android:background="@color/colorAccent"/>
+        android:background="@drawable/button_ripple_effect"
+        />
 
     <Button
         android:id="@+id/view_saved"
@@ -41,7 +42,7 @@
         android:layout_margin="@dimen/default_margin"
         android:layout_gravity="center"
         android:text="@string/view_saved"
-        android:background="@color/colorAccent"
+        android:background="@drawable/button_ripple_effect"
         android:onClick="viewSaved"
         />
 
@@ -52,7 +53,8 @@
         android:layout_margin="@dimen/default_margin"
         android:layout_gravity="center"
         android:text="@string/get_current"
-        android:background="@color/colorAccent"/>
+        android:background="@drawable/button_ripple_effect"
+        />
 
     <Button
         android:id="@+id/connect"
@@ -61,5 +63,6 @@
         android:layout_margin="@dimen/default_margin"
         android:layout_gravity="center"
         android:text="@string/connect_bluetooth"
-        android:background="@color/colorAccent"/>
+        android:background="@drawable/button_ripple_effect"
+        />
 </LinearLayout>

@@ -20,6 +20,10 @@ public class MatrixFileLayout {
         return this.textLayout.getName() + (this.type == LayoutTypes.Text ? " (Text)" : " (Custom)");
     }
 
+    public String getSubtitle() {
+        return this.type == LayoutTypes.Text ? "Text" : "Custom";
+    }
+
     public LayoutTypes getType() {
         return type;
     }
