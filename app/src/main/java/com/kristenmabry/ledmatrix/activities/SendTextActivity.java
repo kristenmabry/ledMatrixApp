@@ -46,10 +46,10 @@ public class SendTextActivity extends AppCompatActivity {
 
     public void previewText(View v) {
         line1Output.setText(formatText(line1.getText(), line1.getHexColors()));
-        line1Output.setBackgroundResource(android.R.color.black);
+        line1Output.setBackgroundResource(R.color.black);
 
         line2Output.setText(formatText(line2.getText(), line2.getHexColors()));
-        line2Output.setBackgroundResource(android.R.color.black);
+        line2Output.setBackgroundResource(R.color.black);
     }
 
     private Spanned formatText(String text, String[] colors) {

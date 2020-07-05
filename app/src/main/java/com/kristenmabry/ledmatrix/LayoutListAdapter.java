@@ -39,7 +39,7 @@ public class LayoutListAdapter extends RecyclerView.Adapter<LayoutListAdapter.Vi
     @Override
     public LayoutListAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         viewGroup = parent;
-        View v = LayoutInflater.from(parent.getContext()).inflate(android.R.layout.simple_list_item_2, parent, false);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.two_line_list_item, parent, false);
         return new LayoutListAdapter.ViewHolder(v);
     }
 
@@ -84,7 +84,7 @@ public class LayoutListAdapter extends RecyclerView.Adapter<LayoutListAdapter.Vi
         View popupView = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.layout_options_popup, viewGroup, false);
         final PopupWindow popup = new PopupWindow(viewGroup, LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT, true);
         popup.setContentView(popupView);
-        popup.setAnimationStyle(android.R.anim.bounce_interpolator);
+        popup.setAnimationStyle(R.style.popInOutAnimation);
         popup.showAtLocation(viewGroup, Gravity.CENTER, 0, 0);
 
         popupView.findViewById(R.id.edit).setOnClickListener(new View.OnClickListener() {
@@ -131,8 +131,8 @@ public class LayoutListAdapter extends RecyclerView.Adapter<LayoutListAdapter.Vi
         public ViewHolder(View v) {
             super(v);
             view = v;
-            titleView = v.findViewById(android.R.id.text1);
-            subtitleView = v.findViewById(android.R.id.text2);
+            titleView = v.findViewById(R.id.text1);
+            subtitleView = v.findViewById(R.id.text2);
         }
 
     }
