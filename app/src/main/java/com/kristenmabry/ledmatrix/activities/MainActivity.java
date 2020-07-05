@@ -1,4 +1,4 @@
-package com.kristenmabry.ledmatrix;
+package com.kristenmabry.ledmatrix.activities;
 
 
 import android.content.Intent;
@@ -8,6 +8,8 @@ import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.kristenmabry.ledmatrix.R;
+
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -15,7 +17,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        final Button button = (Button) findViewById(R.id.start);
+        final Button button = findViewById(R.id.start);
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 boolean bluetoothConnected = true;

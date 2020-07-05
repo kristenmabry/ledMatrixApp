@@ -1,4 +1,4 @@
-package com.kristenmabry.ledmatrix;
+package com.kristenmabry.ledmatrix.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -9,6 +9,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.GridLayout;
 import android.widget.LinearLayout;
+
+import com.kristenmabry.ledmatrix.R;
 
 public class ColorPickerActivity extends AppCompatActivity implements View.OnClickListener {
     final static public int KEY_PICKER_CODE = 1000;
@@ -22,7 +24,7 @@ public class ColorPickerActivity extends AppCompatActivity implements View.OnCli
         setContentView(R.layout.activity_color_picker);
         Intent intent = getIntent();
         pickerNum = intent.getIntExtra(KEY_PICKER_NUM, 0);
-        GridLayout grid = (GridLayout) findViewById(R.id.grid);
+        GridLayout grid = findViewById(R.id.grid);
         generateColors(grid);
     }
 
@@ -60,9 +62,9 @@ public class ColorPickerActivity extends AppCompatActivity implements View.OnCli
     }
 
     static public String intToHex(int r, int g, int b) {
-        String hexR = String.format("%02X", (int) (r * 255) / 7);
-        String hexG = String.format("%02X", (int) (g * 255) / 7);
-        String hexB = String.format("%02X", (int) (b * 255) / 7);
+        String hexR = String.format("%02X", (r * 255) / 7);
+        String hexG = String.format("%02X", (g * 255) / 7);
+        String hexB = String.format("%02X", (b * 255) / 7);
         return "#" + hexR + hexG + hexB;
     }
 

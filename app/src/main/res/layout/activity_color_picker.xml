@@ -9,7 +9,7 @@
         android:layout_height="wrap_content"
         android:columnCount="5"
         android:rowCount="103"
-        tools:context=".ColorPickerActivity">
+        tools:context=".activities.ColorPickerActivity">
 
     </GridLayout>
 </ScrollView>

@@ -1,4 +1,4 @@
-package com.kristenmabry.ledmatrix;
+package com.kristenmabry.ledmatrix.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.text.HtmlCompat;
@@ -8,6 +8,10 @@ import android.os.Bundle;
 import android.text.Spanned;
 import android.view.View;
 import android.widget.TextView;
+
+import com.kristenmabry.ledmatrix.LineEditorFragment;
+import com.kristenmabry.ledmatrix.classes.MatrixTextLayout;
+import com.kristenmabry.ledmatrix.R;
 
 public class SendTextActivity extends AppCompatActivity {
     public static final String KEY_IS_NEW = "is_new";
@@ -29,8 +33,8 @@ public class SendTextActivity extends AppCompatActivity {
 
         line1 = (LineEditorFragment) getSupportFragmentManager().findFragmentById(R.id.line1);
         line2 = (LineEditorFragment) getSupportFragmentManager().findFragmentById(R.id.line2);
-        line1Output = (TextView) findViewById(R.id.line1_output);
-        line2Output = (TextView) findViewById(R.id.line2_output);
+        line1Output = findViewById(R.id.line1_output);
+        line2Output = findViewById(R.id.line2_output);
 
         if (!isNew) {
             prevLayout = intent.getParcelableExtra(SaveLayoutActivity.KEY_MATRIX_LAYOUT);

@@ -8,10 +8,11 @@
     android:orientation="vertical"
     android:gravity="center"
     android:layout_gravity="center"
-    tools:context=".MainActivity">
+    tools:context=".activities.MainActivity">
 
     <ImageView
         android:id="@+id/main_logo"
+        android:contentDescription="@string/logo"
         android:layout_width="wrap_content"
         android:layout_height="320dp"
         android:layout_marginBottom="100dp"
@@ -23,6 +24,6 @@
         android:layout_height="68dp"
         android:background="@drawable/button_ripple_effect"
         android:text="@string/start_button"
-        android:textSize="20dp" />
+        android:textSize="20sp" />
 
 </LinearLayout>

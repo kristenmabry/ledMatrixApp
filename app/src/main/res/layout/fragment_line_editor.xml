@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SendTextActivity">
+    tools:context=".activities.SendTextActivity">
 
     <TextView
         android:id="@+id/line_title"
@@ -20,10 +20,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/default_margin"
-        android:layout_alignParentRight="true"
-        android:layout_toRightOf="@id/line_title"
+        android:layout_alignParentEnd="true"
+        android:layout_toEndOf="@id/line_title"
         android:layout_alignBaseline="@id/line_title"
-        android:textSize="24dp"
+        android:textSize="24sp"
+        android:inputType="text"
         android:maxLength="5" />
 
     <View
@@ -32,7 +33,7 @@
         android:layout_height="@dimen/color_picker_size"
         android:layout_margin="@dimen/color_picker_margin"
         android:layout_below="@id/line_title"
-        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
         android:background="@color/white"/>
     <View
         android:id="@+id/color_picker2"
@@ -40,7 +41,7 @@
         android:layout_height="@dimen/color_picker_size"
         android:layout_margin="@dimen/color_picker_margin"
         android:layout_below="@id/line_title"
-        android:layout_toRightOf="@id/color_picker1"
+        android:layout_toEndOf="@id/color_picker1"
         android:background="@color/white"/>
     <View
         android:id="@+id/color_picker3"
@@ -48,7 +49,7 @@
         android:layout_height="@dimen/color_picker_size"
         android:layout_margin="@dimen/color_picker_margin"
         android:layout_below="@id/line_title"
-        android:layout_toRightOf="@id/color_picker2"
+        android:layout_toEndOf="@id/color_picker2"
         android:background="@color/white"/>
     <View
         android:id="@+id/color_picker4"
@@ -56,7 +57,7 @@
         android:layout_height="@dimen/color_picker_size"
         android:layout_margin="@dimen/color_picker_margin"
         android:layout_below="@id/line_title"
-        android:layout_toRightOf="@id/color_picker3"
+        android:layout_toEndOf="@id/color_picker3"
         android:background="@color/white"/>
     <View
         android:id="@+id/color_picker5"
@@ -64,7 +65,7 @@
         android:layout_height="@dimen/color_picker_size"
         android:layout_margin="@dimen/color_picker_margin"
         android:layout_below="@id/line_title"
-        android:layout_toRightOf="@id/color_picker4"
+        android:layout_toEndOf="@id/color_picker4"
         android:background="@color/white"/>
 
 </RelativeLayout>

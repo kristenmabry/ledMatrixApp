@@ -1,4 +1,4 @@
-package com.kristenmabry.ledmatrix;
+package com.kristenmabry.ledmatrix.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -11,6 +11,10 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
+import com.kristenmabry.ledmatrix.classes.FileUtils;
+import com.kristenmabry.ledmatrix.LayoutListAdapter;
+import com.kristenmabry.ledmatrix.classes.MatrixFileLayout;
+import com.kristenmabry.ledmatrix.R;
 
 
 public class ViewLayoutsActivity extends AppCompatActivity {
@@ -26,7 +30,7 @@ public class ViewLayoutsActivity extends AppCompatActivity {
     }
 
     private void initToolbar() {
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
@@ -67,7 +71,7 @@ public class ViewLayoutsActivity extends AppCompatActivity {
             list.setLayoutManager(layoutManager);
 
             savedLayouts = MatrixFileLayout.sortForDisplay(savedLayouts);
-            RecyclerView.Adapter adapter = new LayoutListAdapter(savedLayouts);
+            LayoutListAdapter adapter = new LayoutListAdapter(savedLayouts);
             list.setAdapter(adapter);
         }
     }

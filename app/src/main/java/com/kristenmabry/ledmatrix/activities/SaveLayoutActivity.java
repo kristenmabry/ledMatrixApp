@@ -1,4 +1,4 @@
-package com.kristenmabry.ledmatrix;
+package com.kristenmabry.ledmatrix.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -9,6 +9,10 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
+import com.kristenmabry.ledmatrix.classes.FileUtils;
+import com.kristenmabry.ledmatrix.classes.MatrixFileLayout;
+import com.kristenmabry.ledmatrix.classes.MatrixTextLayout;
+import com.kristenmabry.ledmatrix.R;
 
 import java.util.Arrays;
 
@@ -26,8 +30,8 @@ public class SaveLayoutActivity extends AppCompatActivity {
         Intent intent = getIntent();
         layout = intent.getParcelableExtra(KEY_MATRIX_LAYOUT);
 
-        nameInput = (EditText) findViewById(R.id.name);
-        sortInput = (EditText) findViewById(R.id.sort_order);
+        nameInput = findViewById(R.id.name);
+        sortInput = findViewById(R.id.sort_order);
         if (layout.getIsNew()) {
             nameInput.setText(layout.getLine1() + " " + layout.getLine2());
         } else {

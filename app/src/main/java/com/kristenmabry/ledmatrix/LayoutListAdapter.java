@@ -1,25 +1,38 @@
 package com.kristenmabry.ledmatrix;
 
 import android.content.Intent;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.TextView;
-import android.widget.TwoLineListItem;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.kristenmabry.ledmatrix.activities.SaveLayoutActivity;
+import com.kristenmabry.ledmatrix.activities.SendTextActivity;
+import com.kristenmabry.ledmatrix.classes.FileUtils;
+import com.kristenmabry.ledmatrix.classes.LayoutTypes;
+import com.kristenmabry.ledmatrix.classes.MatrixFileLayout;
+
+import java.util.ArrayList;
+import java.util.Collections;
+
 import static androidx.core.content.ContextCompat.getColor;
 import static androidx.core.content.ContextCompat.startActivity;
 
-public class LayoutListAdapter extends RecyclerView.Adapter<LayoutListAdapter.ViewHolder> implements View.OnClickListener {
-    private MatrixFileLayout[] dataset;
+public class LayoutListAdapter extends RecyclerView.Adapter<LayoutListAdapter.ViewHolder> implements View.OnClickListener, View.OnLongClickListener {
+    private ArrayList<MatrixFileLayout> dataset;
     private ViewGroup viewGroup;
 
     public LayoutListAdapter(MatrixFileLayout[] newData) {
-        dataset = newData;
+        dataset = new ArrayList<>();
+        Collections.addAll(dataset, newData);
     }
 
     @NonNull
@@ -35,25 +48,79 @@ public class LayoutListAdapter extends RecyclerView.Adapter<LayoutListAdapter.Vi
         holder.view.setId(position);
         holder.view.setBackground(ContextCompat.getDrawable(viewGroup.getContext(), R.drawable.list_item_ripple_effect));
         holder.view.setOnClickListener(this);
-        holder.titleView.setText(dataset[position].getLayout().getName());
-        holder.subtitleView.setText(dataset[position].getSubtitle());
+        holder.view.setOnLongClickListener(this);
+        holder.titleView.setText(dataset.get(position).getLayout().getName());
+        holder.subtitleView.setText(dataset.get(position).getSubtitle());
         holder.subtitleView.setTextColor(getColor(viewGroup.getContext(), android.R.color.darker_gray));
     }
 
     @Override
     public int getItemCount() {
-        return dataset.length;
+        return dataset.size();
+    }
+
+    public void removeAt(int position) {
+        dataset.remove(position);
+        notifyItemRemoved(position);
+        notifyItemRangeChanged(position, dataset.size());
     }
 
     @Override
     public void onClick(View view) {
         Intent intent;
-        MatrixFileLayout layout = dataset[view.getId()];
+        MatrixFileLayout layout = dataset.get(view.getId());
         if (layout.getType() == LayoutTypes.Text) {
             intent = new Intent(viewGroup.getContext(), SendTextActivity.class);
             intent.putExtra(SendTextActivity.KEY_IS_NEW, false);
             intent.putExtra(SaveLayoutActivity.KEY_MATRIX_LAYOUT, layout.getLayout());
             startActivity(viewGroup.getContext(), intent, null);
+        }
+    }
+
+    @Override
+    public boolean onLongClick(final View view) {
+        final int position = view.getId();
+
+        View popupView = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.layout_options_popup, viewGroup, false);
+        final PopupWindow popup = new PopupWindow(viewGroup, LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT, true);
+        popup.setContentView(popupView);
+        popup.setAnimationStyle(android.R.anim.bounce_interpolator);
+        popup.showAtLocation(viewGroup, Gravity.CENTER, 0, 0);
+
+        popupView.findViewById(R.id.edit).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                editLayout(position);
+                popup.dismiss();
+            }
+        });
+
+        popupView.findViewById(R.id.delete).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                deleteLayout(position);
+                popup.dismiss();
+            }
+        });
+
+        return true;
+    }
+
+    private void editLayout(int position) {
+        MatrixFileLayout selectedLayout = dataset.get(position);
+        Intent intent = new Intent(viewGroup.getContext(), SaveLayoutActivity.class);
+        intent.putExtra(SaveLayoutActivity.KEY_MATRIX_LAYOUT, selectedLayout.getLayout());
+        startActivity(viewGroup.getContext(), intent, null);
+    }
+
+    private void deleteLayout(int position) {
+        MatrixFileLayout selectedLayout = dataset.get(position);
+        if (FileUtils.deleteFile(viewGroup.getContext(), selectedLayout.getLayout().getFileName())) {
+            removeAt(position);
+            String name = selectedLayout.getLayout().getName();
+            Toast.makeText(viewGroup.getContext(), viewGroup.getResources().getString(R.string.layout_deleted, name), Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(viewGroup.getContext(), viewGroup.getResources().getString(R.string.error_deleting), Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -67,5 +134,6 @@ public class LayoutListAdapter extends RecyclerView.Adapter<LayoutListAdapter.Vi
             titleView = v.findViewById(android.R.id.text1);
             subtitleView = v.findViewById(android.R.id.text2);
         }
+
     }
 }

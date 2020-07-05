@@ -22,4 +22,9 @@
     <string name="create_custom">Create Custom Layout</string>
     <string name="error_loading">Error loading files</string>
     <string name="layout_saved">%1$s layout saved</string>
+    <string name="edit">Edit</string>
+    <string name="delete">Delete</string>
+    <string name="layout_deleted">%1$s layout deleted</string>
+    <string name="error_deleting">Error deleting layout</string>
+    <string name="logo">Logo</string>
 </resources>

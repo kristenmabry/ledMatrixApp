@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.kristenmabry.ledmatrix.SaveLayoutActivity"
+    tools:context="com.kristenmabry.ledmatrix.activities.SaveLayoutActivity"
     android:paddingHorizontal="@dimen/extra_padding_horizontal"
     >
     <TextView
@@ -31,7 +31,7 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/default_margin"
         android:layout_marginTop="@dimen/default_margin"
-        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
         android:layout_below="@id/name"
         android:text="@string/sort_label"
         android:textSize="@dimen/font_size" />

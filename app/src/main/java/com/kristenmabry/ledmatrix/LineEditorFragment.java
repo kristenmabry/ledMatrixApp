@@ -16,6 +16,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.kristenmabry.ledmatrix.activities.ColorPickerActivity;
+
 import static android.app.Activity.RESULT_OK;
 
 public class LineEditorFragment extends Fragment implements View.OnClickListener {
@@ -41,9 +43,9 @@ public class LineEditorFragment extends Fragment implements View.OnClickListener
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        TextView titleView = (TextView) view.findViewById(R.id.line_title);
+        TextView titleView = view.findViewById(R.id.line_title);
         titleView.setText(mTitle);
-        input = (EditText) view.findViewById(R.id.line_text);
+        input = view.findViewById(R.id.line_text);
 
         pickers[0] = view.findViewById(R.id.color_picker1);
         pickers[1] = view.findViewById(R.id.color_picker2);

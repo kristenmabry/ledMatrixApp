@@ -1,9 +1,11 @@
-package com.kristenmabry.ledmatrix;
+package com.kristenmabry.ledmatrix.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+
+import com.kristenmabry.ledmatrix.R;
 
 public class ChoicesActivity extends AppCompatActivity {
 

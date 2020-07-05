@@ -1,11 +1,10 @@
-package com.kristenmabry.ledmatrix;
+package com.kristenmabry.ledmatrix.classes;
 
 import android.content.Context;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.io.IOException;
 
 import static android.content.Context.MODE_PRIVATE;
 
@@ -57,5 +56,11 @@ public class FileUtils {
             }
         }
         return fileStrings;
+    }
+
+    public static boolean deleteFile(Context context, String filename) {
+        File dir = context.getFilesDir();
+        File fileToRemove = new File(dir, filename);
+        return fileToRemove.delete();
     }
 }

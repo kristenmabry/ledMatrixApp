@@ -1,8 +1,7 @@
-package com.kristenmabry.ledmatrix;
+package com.kristenmabry.ledmatrix.classes;
 
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.util.Log;
 
 public class MatrixTextLayout implements Parcelable {
     private String filename;
