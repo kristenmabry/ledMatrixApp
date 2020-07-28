@@ -1,4 +1,4 @@
-package com.kristenmabry.ledmatrix;
+package com.kristenmabry.ledmatrix.layouts;
 
 import android.content.Intent;
 import android.view.Gravity;
@@ -14,11 +14,10 @@ import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.kristenmabry.ledmatrix.R;
 import com.kristenmabry.ledmatrix.activities.SaveLayoutActivity;
 import com.kristenmabry.ledmatrix.activities.SendTextActivity;
-import com.kristenmabry.ledmatrix.classes.FileUtils;
-import com.kristenmabry.ledmatrix.classes.LayoutTypes;
-import com.kristenmabry.ledmatrix.classes.MatrixFileLayout;
+import com.kristenmabry.ledmatrix.FileUtils;
 
 import java.util.ArrayList;
 import java.util.Collections;

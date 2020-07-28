@@ -27,4 +27,6 @@
     <string name="layout_deleted">%1$s layout deleted</string>
     <string name="error_deleting">Error deleting layout</string>
     <string name="logo">Logo</string>
+    <string name="bluetooth_devices">Bluetooth Devices</string>
+    <string name="bluetooth_not_supported">Bluetooh is not supported on this device</string>
 </resources>

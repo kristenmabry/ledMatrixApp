@@ -1,4 +1,4 @@
-package com.kristenmabry.ledmatrix.classes;
+package com.kristenmabry.ledmatrix.layouts;
 
 import android.os.Parcel;
 import android.os.Parcelable;

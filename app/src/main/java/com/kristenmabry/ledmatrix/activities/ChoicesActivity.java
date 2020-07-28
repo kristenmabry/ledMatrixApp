@@ -16,13 +16,18 @@ public class ChoicesActivity extends AppCompatActivity {
     }
 
     public void sendText(View view) {
-        Intent intent = new Intent(ChoicesActivity.this, SendTextActivity.class);
+        Intent intent = new Intent(this, SendTextActivity.class);
         intent.putExtra(SendTextActivity.KEY_IS_NEW, true);
         startActivity(intent);
     }
 
     public void viewSaved(View view) {
-        Intent intent = new Intent(ChoicesActivity.this, ViewLayoutsActivity.class);
+        Intent intent = new Intent(this, ViewLayoutsActivity.class);
+        startActivity(intent);
+    }
+
+    public void openBluetooth(View view) {
+        Intent intent = new Intent(this, ViewBluetoothDevices.class);
         startActivity(intent);
     }
 }

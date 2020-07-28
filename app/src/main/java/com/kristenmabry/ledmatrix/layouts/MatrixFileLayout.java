@@ -1,4 +1,4 @@
-package com.kristenmabry.ledmatrix.classes;
+package com.kristenmabry.ledmatrix.layouts;
 
 import java.util.Arrays;
 import java.util.Comparator;

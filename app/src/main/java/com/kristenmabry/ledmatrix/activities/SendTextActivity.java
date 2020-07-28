@@ -10,7 +10,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.kristenmabry.ledmatrix.LineEditorFragment;
-import com.kristenmabry.ledmatrix.classes.MatrixTextLayout;
+import com.kristenmabry.ledmatrix.layouts.MatrixTextLayout;
 import com.kristenmabry.ledmatrix.R;
 
 public class SendTextActivity extends AppCompatActivity {

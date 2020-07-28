@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".activities.ViewLayoutsActivity">
+    tools:context=".activities.ViewBluetoothDevices">
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
@@ -12,7 +13,6 @@
         android:color="@color/white"
         android:background="@color/colorPrimary"
         />
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/list"
         android:scrollbars="vertical"
@@ -20,9 +20,8 @@
         android:layout_height="match_parent"
         android:visibility="gone">
     </androidx.recyclerview.widget.RecyclerView>
-
     <TextView
-        android:id="@+id/no_layouts"
+        android:id="@+id/no_devices"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/no_layouts"
@@ -30,26 +29,5 @@
         android:layout_gravity="center"
         android:textAlignment="center"
         android:textSize="@dimen/font_size"
-        />
-    <Button
-        android:id="@+id/create_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/default_margin"
-        android:padding="@dimen/default_margin"
-        android:text="@string/create_text"
-        android:layout_gravity="center"
-        android:background="@color/colorAccent"
-        android:onClick="sendText"
-        />
-    <Button
-        android:id="@+id/create_custom"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/default_margin"
-        android:padding="@dimen/default_margin"
-        android:text="@string/create_custom"
-        android:layout_gravity="center"
-        android:background="@color/colorAccent"
         />
 </LinearLayout>

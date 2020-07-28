@@ -1,4 +1,4 @@
-package com.kristenmabry.ledmatrix.classes;
+package com.kristenmabry.ledmatrix;
 
 import android.content.Context;
 

@@ -11,9 +11,9 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
-import com.kristenmabry.ledmatrix.classes.FileUtils;
-import com.kristenmabry.ledmatrix.LayoutListAdapter;
-import com.kristenmabry.ledmatrix.classes.MatrixFileLayout;
+import com.kristenmabry.ledmatrix.FileUtils;
+import com.kristenmabry.ledmatrix.layouts.LayoutListAdapter;
+import com.kristenmabry.ledmatrix.layouts.MatrixFileLayout;
 import com.kristenmabry.ledmatrix.R;
 
 

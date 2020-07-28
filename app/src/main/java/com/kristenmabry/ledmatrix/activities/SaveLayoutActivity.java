@@ -9,9 +9,9 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
-import com.kristenmabry.ledmatrix.classes.FileUtils;
-import com.kristenmabry.ledmatrix.classes.MatrixFileLayout;
-import com.kristenmabry.ledmatrix.classes.MatrixTextLayout;
+import com.kristenmabry.ledmatrix.FileUtils;
+import com.kristenmabry.ledmatrix.layouts.MatrixFileLayout;
+import com.kristenmabry.ledmatrix.layouts.MatrixTextLayout;
 import com.kristenmabry.ledmatrix.R;
 
 import java.util.Arrays;
