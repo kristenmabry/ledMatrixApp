@@ -8,4 +8,5 @@
     <color name="black">#000000</color>
     <color name="background">#303030</color>
     <color name="backgroundRipple">#717171</color>
+    <color name="green">#2AA414</color>
 </resources>

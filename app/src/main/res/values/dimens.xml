@@ -7,4 +7,5 @@
     <dimen name="color_picker_margin">24dp</dimen>
     <dimen name="extra_padding_horizontal">36dp</dimen>
     <dimen name="extra_padding_vertical">64dp</dimen>
+    <dimen name="selected_box">15dp</dimen>
 </resources>

@@ -33,19 +33,19 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void nextPage(View view) {
-        BluetoothAdapter bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
-        if (bluetoothAdapter == null) {
-            // Device doesn't support Bluetooth
-            Toast.makeText(this, R.string.bluetooth_not_supported, Toast.LENGTH_SHORT).show();
-            return;
-        }
-        if (!bluetoothAdapter.isEnabled()) {
-            Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
-            startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
-        } else {
+//        BluetoothAdapter bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+//        if (bluetoothAdapter == null) {
+//            // Device doesn't support Bluetooth
+//            Toast.makeText(this, R.string.bluetooth_not_supported, Toast.LENGTH_SHORT).show();
+//            return;
+//        }
+//        if (!bluetoothAdapter.isEnabled()) {
+//            Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
+//            startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
+//        } else {
             Intent intent = new Intent(MainActivity.this, ChoicesActivity.class);
             startActivity(intent);
-        }
+//        }
 
     }
 }

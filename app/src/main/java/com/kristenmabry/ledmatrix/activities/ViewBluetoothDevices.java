@@ -6,7 +6,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.bluetooth.BluetoothDevice;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 
@@ -51,7 +53,7 @@ public class ViewBluetoothDevices extends AppCompatActivity {
             RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
             list.setLayoutManager(layoutManager);
 
-            BluetoothDevicesAdapter adapter = new BluetoothDevicesAdapter(devices);
+            BluetoothDevicesAdapter adapter = new BluetoothDevicesAdapter(this, devices);
             list.setAdapter(adapter);
         }
     }
