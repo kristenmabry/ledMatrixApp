@@ -12,4 +12,13 @@ public class BluetoothUtils {
         Set<BluetoothDevice> pairedDevices = bluetoothAdapter.getBondedDevices();
         return pairedDevices.toArray(new BluetoothDevice[pairedDevices.size()]);
     }
+
+    public static boolean isAddressValid(String address) {
+        return BluetoothAdapter.checkBluetoothAddress(address);
+    }
+
+    public static boolean isBluetoothEnabled() {
+        BluetoothAdapter bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+        return bluetoothAdapter.isEnabled();
+    }
 }

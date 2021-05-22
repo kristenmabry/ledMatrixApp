@@ -25,6 +25,9 @@ public class BluetoothDevicesAdapter extends RecyclerView.Adapter<BluetoothDevic
     private ViewGroup viewGroup;
     private Activity activity;
     private ArrayList<ViewHolder> viewHolders;
+    private SharedPreferences sharedPref;
+    private String selectedAddress;
+    private final String noAddress = "no_address";
 
     public BluetoothDevicesAdapter(Activity a, BluetoothDevice[] newData) {
         dataset = new ArrayList<>();
@@ -37,6 +40,10 @@ public class BluetoothDevicesAdapter extends RecyclerView.Adapter<BluetoothDevic
     @Override
     public BluetoothDevicesAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         viewGroup = parent;
+
+        this.sharedPref = this.activity.getSharedPreferences(parent.getContext().getString(R.string.shared_preferences_file_key), Context.MODE_PRIVATE);
+        this.selectedAddress = this.sharedPref.getString(parent.getContext().getString(R.string.save_selected_device_key), this.noAddress);
+
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.two_line_list_item, parent, false);
         ViewHolder vh = new BluetoothDevicesAdapter.ViewHolder(v);
         this.viewHolders.add(vh);
@@ -45,12 +52,16 @@ public class BluetoothDevicesAdapter extends RecyclerView.Adapter<BluetoothDevic
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        BluetoothDevice device = dataset.get(position);
         holder.view.setId(position);
         holder.view.setBackground(ContextCompat.getDrawable(viewGroup.getContext(), R.drawable.list_item_ripple_effect));
         holder.view.setOnClickListener(this);
         holder.titleView.setText(dataset.get(position).getName());
         holder.subtitleView.setText(dataset.get(position).getAddress());
         holder.subtitleView.setTextColor(getColor(viewGroup.getContext(), android.R.color.darker_gray));
+        if (device.getAddress().equals(this.selectedAddress)) {
+            holder.selectedBox.setBackgroundColor(getColor(viewGroup.getContext(), R.color.green));
+        }
     }
 
     @Override
@@ -63,11 +74,17 @@ public class BluetoothDevicesAdapter extends RecyclerView.Adapter<BluetoothDevic
         this.viewHolders.forEach(vh ->
             vh.selectedBox.setBackgroundColor(getColor(viewGroup.getContext(), android.R.color.darker_gray))
         );
-        BluetoothDevice device = dataset.get(view.getId());
-        this.viewHolders.get(view.getId()).selectedBox.setBackgroundColor(getColor(viewGroup.getContext(), R.color.green));
-        SharedPreferences sharedPref = this.activity.getSharedPreferences(view.getContext().getString(R.string.shared_preferences_file_key), Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPref.edit();
-        editor.putString(view.getContext().getString(R.string.save_selected_device_key), device.getAddress());
+        String deviceAddress = dataset.get(view.getId()).getAddress();
+        SharedPreferences.Editor editor = this.sharedPref.edit();
+        if (deviceAddress.equals(this.selectedAddress)) {
+            editor.remove(view.getContext().getString(R.string.save_selected_device_key));
+            this.selectedAddress = this.noAddress;
+        }
+        else {
+            editor.putString(view.getContext().getString(R.string.save_selected_device_key), deviceAddress);
+            this.viewHolders.get(view.getId()).selectedBox.setBackgroundColor(getColor(viewGroup.getContext(), R.color.green));
+            this.selectedAddress = deviceAddress;
+        }
         editor.apply();
     }
 

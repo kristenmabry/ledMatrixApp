@@ -7,7 +7,7 @@
     tools:context=".activities.SendTextActivity"
     android:orientation="vertical">
 
-    <fragment
+    <androidx.fragment.app.FragmentContainerView
         android:name="com.kristenmabry.ledmatrix.LineEditorFragment"
         android:id="@+id/line1"
         android:layout_height="wrap_content"
@@ -17,7 +17,7 @@
         app:title="@string/first_line"
         />
 
-    <fragment
+    <androidx.fragment.app.FragmentContainerView
         android:name="com.kristenmabry.ledmatrix.LineEditorFragment"
         android:id="@+id/line2"
         android:layout_height="wrap_content"
@@ -87,6 +87,7 @@
             android:onClick="saveLayout"
             />
         <Button
+            android:id="@+id/send_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/default_margin"

@@ -3,13 +3,17 @@ package com.kristenmabry.ledmatrix.activities;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.text.HtmlCompat;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Spanned;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.kristenmabry.ledmatrix.LineEditorFragment;
+import com.kristenmabry.ledmatrix.bluetooth.BluetoothUtils;
 import com.kristenmabry.ledmatrix.layouts.MatrixTextLayout;
 import com.kristenmabry.ledmatrix.R;
 
@@ -21,6 +25,8 @@ public class SendTextActivity extends AppCompatActivity {
     private TextView line2Output;
     private boolean isNew;
     private MatrixTextLayout prevLayout;
+    private final String noAddress = "none_found";
+    private String btAddress;
 
 
     @Override
@@ -42,6 +48,16 @@ public class SendTextActivity extends AppCompatActivity {
             line2.setPrevLayout(prevLayout.getLine2(), prevLayout.getColors2());
             this.previewText(null);
         }
+
+        SharedPreferences sharedPref = this.getSharedPreferences(getString(R.string.shared_preferences_file_key), Context.MODE_PRIVATE);
+        String address = sharedPref.getString(getString(R.string.save_selected_device_key), this.noAddress);
+        if (address.equals(this.noAddress) || !BluetoothUtils.isAddressValid(address) || !BluetoothUtils.isBluetoothEnabled()) {
+            Button sendTextButton = (Button) findViewById(R.id.send_text);
+            sendTextButton.setEnabled(false);
+        }
+        else {
+            this.btAddress = address;
+        }
     }
 
     public void previewText(View v) {
@@ -57,7 +73,7 @@ public class SendTextActivity extends AppCompatActivity {
         String lineText = "";
         text = String.format("%1$-5s", text);
         for (int i = 0; i < text.length(); ++i) {
-            lineText += String.format(FONT_REPLACEMENT, colors[i], text.substring(i, i + 1));
+            lineText += String.format(FONT_REPLACEMENT, colors[i], text.charAt(i));
         }
         return HtmlCompat.fromHtml(lineText, HtmlCompat.FROM_HTML_MODE_LEGACY);
     }
@@ -75,5 +91,10 @@ public class SendTextActivity extends AppCompatActivity {
         }
         intent.putExtra(SaveLayoutActivity.KEY_MATRIX_LAYOUT, prevLayout);
         startActivity(intent);
+    }
+
+    public void sendlayout(View view) {
+        // connect to bluetooth device
+
     }
 }

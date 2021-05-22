@@ -29,6 +29,7 @@
     <string name="logo">Logo</string>
     <string name="bluetooth_devices">Bluetooth Devices</string>
     <string name="bluetooth_not_supported">Bluetooth is not supported on this device</string>
+    <string name="no_bluetooth_devices">No Bluetooth devices were found.</string>
     <string name="save_selected_device_key">SelectedBluetoothDevice</string>
     <string name="shared_preferences_file_key">com.kristenmabry.ledmatrix.bluetooth</string>
 </resources>
