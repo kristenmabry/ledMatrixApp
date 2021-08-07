@@ -25,6 +25,7 @@ public class LineEditorFragment extends Fragment implements View.OnClickListener
     private int[][] colors = { {7, 7, 7}, {7, 7, 7}, {7, 7, 7}, {7, 7, 7}, {7, 7, 7} };
     private String mTitle;
     private View[] pickers = new View[5];
+    private String initText = null;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -54,6 +55,12 @@ public class LineEditorFragment extends Fragment implements View.OnClickListener
         pickers[4] = view.findViewById(R.id.color_picker5);
         for (int i = 0; i < 5; ++i) {
             pickers[i].setOnClickListener(this);
+        }
+        if (this.initText != null) {
+            input.setText(this.initText);
+            for (int i = 0; i < 5; i++) {
+                this.setColor(i, this.colors[i]);
+            }
         }
     }
 
@@ -111,10 +118,19 @@ public class LineEditorFragment extends Fragment implements View.OnClickListener
         return colors;
     }
 
-    public void setPrevLayout(String text, int[][] colorArr) {
-        input.setText(text);
-        for (int i = 0; i < 5; i++) {
-            this.setColor(i, colorArr[i]);
+    public byte[] encode() {
+        byte[] encodedBytes = new byte[10];
+        int[][] colors = this.getColors();
+        byte[] text = String.format("%-5s", this.getText()).getBytes();
+        for (int i = 0; i < 5; ++i) {
+            encodedBytes[i*2] = (byte)((colors[i][0] << 5) | (colors[i][1] << 2) | (colors[i][2] >> 1));
+            encodedBytes[(i*2) + 1] = (byte)(((colors[i][2] & 0b1) << 7) | text[i]);
         }
+        return encodedBytes;
+    }
+
+    public void setPrevLayout(String text, int[][] colorArr) {
+        this.initText = text;
+        this.colors = colorArr;
     }
 }

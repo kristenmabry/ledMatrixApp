@@ -78,7 +78,8 @@ public class ViewLayoutsActivity extends AppCompatActivity {
 
     public void sendText(View view) {
         Intent intent = new Intent(this, SendTextActivity.class);
-        intent.putExtra(SendTextActivity.KEY_IS_NEW, true);
+        intent.putExtra(SendTextActivity.KEY_IS_NEW, false);
+        intent.putExtra(SaveLayoutActivity.KEY_MATRIX_LAYOUT, savedLayouts[view.getId()].getLayout());
         startActivity(intent);
     }
 }

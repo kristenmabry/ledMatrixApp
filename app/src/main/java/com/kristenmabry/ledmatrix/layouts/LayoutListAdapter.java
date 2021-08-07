@@ -51,6 +51,7 @@ public class LayoutListAdapter extends RecyclerView.Adapter<LayoutListAdapter.Vi
         holder.titleView.setText(dataset.get(position).getLayout().getName());
         holder.subtitleView.setText(dataset.get(position).getSubtitle());
         holder.subtitleView.setTextColor(getColor(viewGroup.getContext(), android.R.color.darker_gray));
+        holder.selected.setVisibility(View.INVISIBLE);
     }
 
     @Override
@@ -125,11 +126,13 @@ public class LayoutListAdapter extends RecyclerView.Adapter<LayoutListAdapter.Vi
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         public View view;
+        public View selected;
         public TextView titleView;
         public TextView subtitleView;
         public ViewHolder(View v) {
             super(v);
             view = v;
+            selected = v.findViewById(R.id.selected);
             titleView = v.findViewById(R.id.text1);
             subtitleView = v.findViewById(R.id.text2);
         }

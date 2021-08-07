@@ -27,7 +27,6 @@ public class BluetoothDevicesAdapter extends RecyclerView.Adapter<BluetoothDevic
     private ArrayList<ViewHolder> viewHolders;
     private SharedPreferences sharedPref;
     private String selectedAddress;
-    private final String noAddress = "no_address";
 
     public BluetoothDevicesAdapter(Activity a, BluetoothDevice[] newData) {
         dataset = new ArrayList<>();
@@ -42,7 +41,7 @@ public class BluetoothDevicesAdapter extends RecyclerView.Adapter<BluetoothDevic
         viewGroup = parent;
 
         this.sharedPref = this.activity.getSharedPreferences(parent.getContext().getString(R.string.shared_preferences_file_key), Context.MODE_PRIVATE);
-        this.selectedAddress = this.sharedPref.getString(parent.getContext().getString(R.string.save_selected_device_key), this.noAddress);
+        this.selectedAddress = this.sharedPref.getString(parent.getContext().getString(R.string.save_selected_device_key), BluetoothUtils.NO_ADDRESS);
 
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.two_line_list_item, parent, false);
         ViewHolder vh = new BluetoothDevicesAdapter.ViewHolder(v);
@@ -78,7 +77,7 @@ public class BluetoothDevicesAdapter extends RecyclerView.Adapter<BluetoothDevic
         SharedPreferences.Editor editor = this.sharedPref.edit();
         if (deviceAddress.equals(this.selectedAddress)) {
             editor.remove(view.getContext().getString(R.string.save_selected_device_key));
-            this.selectedAddress = this.noAddress;
+            this.selectedAddress = BluetoothUtils.NO_ADDRESS;
         }
         else {
             editor.putString(view.getContext().getString(R.string.save_selected_device_key), deviceAddress);

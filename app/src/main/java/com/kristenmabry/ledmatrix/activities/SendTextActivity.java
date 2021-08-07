@@ -3,19 +3,23 @@ package com.kristenmabry.ledmatrix.activities;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.text.HtmlCompat;
 
-import android.content.Context;
+import android.bluetooth.BluetoothDevice;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Spanned;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.kristenmabry.ledmatrix.LineEditorFragment;
 import com.kristenmabry.ledmatrix.bluetooth.BluetoothUtils;
 import com.kristenmabry.ledmatrix.layouts.MatrixTextLayout;
 import com.kristenmabry.ledmatrix.R;
+
+import me.aflak.bluetooth.Bluetooth;
+import me.aflak.bluetooth.interfaces.BluetoothCallback;
+import me.aflak.bluetooth.interfaces.DeviceCallback;
 
 public class SendTextActivity extends AppCompatActivity {
     public static final String KEY_IS_NEW = "is_new";
@@ -25,9 +29,8 @@ public class SendTextActivity extends AppCompatActivity {
     private TextView line2Output;
     private boolean isNew;
     private MatrixTextLayout prevLayout;
-    private final String noAddress = "none_found";
-    private String btAddress;
-
+    private String btAddress = null;
+    private Bluetooth bluetooth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,18 +49,51 @@ public class SendTextActivity extends AppCompatActivity {
             prevLayout = intent.getParcelableExtra(SaveLayoutActivity.KEY_MATRIX_LAYOUT);
             line1.setPrevLayout(prevLayout.getLine1(), prevLayout.getColors1());
             line2.setPrevLayout(prevLayout.getLine2(), prevLayout.getColors2());
-            this.previewText(null);
         }
 
-        SharedPreferences sharedPref = this.getSharedPreferences(getString(R.string.shared_preferences_file_key), Context.MODE_PRIVATE);
-        String address = sharedPref.getString(getString(R.string.save_selected_device_key), this.noAddress);
-        if (address.equals(this.noAddress) || !BluetoothUtils.isAddressValid(address) || !BluetoothUtils.isBluetoothEnabled()) {
+        if (BluetoothUtils.isAddressValid(this)) {
             Button sendTextButton = (Button) findViewById(R.id.send_text);
-            sendTextButton.setEnabled(false);
+            this.btAddress = BluetoothUtils.getSelectedAddress(this);
+            bluetooth = new Bluetooth(this);
+            bluetooth.setBluetoothCallback(bluetoothCallback);
+            bluetooth.setDeviceCallback(new DeviceCallback() {
+                @Override public void onDeviceConnected(BluetoothDevice device) {
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            sendTextButton.setEnabled(true);
+                        }
+                    });
+                }
+                @Override public void onDeviceDisconnected(BluetoothDevice device, String message) {
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            sendTextButton.setEnabled(false);
+                        }
+                    });
+                }
+                @Override public void onMessage(byte[] message) {}
+                @Override public void onError(int errorCode) {}
+                @Override public void onConnectError(BluetoothDevice device, String message) {}
+            });
         }
-        else {
-            this.btAddress = address;
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        bluetooth.onStart();
+        if (this.btAddress != null) {
+            bluetooth.connectToAddressWithPortTrick(this.btAddress);
         }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        bluetooth.disconnect();
+        bluetooth.onStop();
     }
 
     public void previewText(View v) {
@@ -70,12 +106,12 @@ public class SendTextActivity extends AppCompatActivity {
 
     private Spanned formatText(String text, String[] colors) {
         final String FONT_REPLACEMENT = "<font color='%1$s'>%2$s</font>";
-        String lineText = "";
+        StringBuilder lineText = new StringBuilder();
         text = String.format("%1$-5s", text);
         for (int i = 0; i < text.length(); ++i) {
-            lineText += String.format(FONT_REPLACEMENT, colors[i], text.charAt(i));
+            lineText.append(String.format(FONT_REPLACEMENT, colors[i], text.charAt(i)));
         }
-        return HtmlCompat.fromHtml(lineText, HtmlCompat.FROM_HTML_MODE_LEGACY);
+        return HtmlCompat.fromHtml(lineText.toString(), HtmlCompat.FROM_HTML_MODE_LEGACY);
     }
 
     public void cancel(View v) {
@@ -93,8 +129,22 @@ public class SendTextActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void sendlayout(View view) {
-        // connect to bluetooth device
-
+    public void sendLayout(View view) {
+        byte[] line1Bytes = line1.encode();
+        byte[] line2Bytes = line2.encode();
+        byte[] finalString = new byte[21];
+        finalString[0] = 'T';
+        System.arraycopy(line1Bytes, 0, finalString, 1, 10);
+        System.arraycopy(line2Bytes, 0, finalString, 11, 10);
+        bluetooth.send(finalString);
+        Toast.makeText(this, "Message sent.", Toast.LENGTH_SHORT).show();
     }
+
+    private BluetoothCallback bluetoothCallback = new BluetoothCallback() {
+        @Override public void onBluetoothTurningOn() {}
+        @Override public void onBluetoothTurningOff() {}
+        @Override public void onBluetoothOff() {}
+        @Override public void onBluetoothOn() {}
+        @Override public void onUserDeniedActivation() {}
+    };
 }
